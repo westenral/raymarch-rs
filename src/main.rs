@@ -13,7 +13,7 @@ fn main() {
             y: -25.0,
             z: 10.0,
         },
-        rad: 50.0,
+        radius: 50.0,
     })];
 
     let xres = 1280;
@@ -30,5 +30,5 @@ fn main() {
         }
     }
 
-    println!("{out_image}");
+    print!("{out_image}");
 }

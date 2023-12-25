@@ -6,11 +6,11 @@ pub trait SignedDistance {
 
 pub struct Sphere {
     pub pos: Vec3,
-    pub rad: f64,
+    pub radius: f64,
 }
 
 impl SignedDistance for Sphere {
     fn dist(&self, point: &Vec3) -> f64 {
-        point.dist(&self.pos) - self.rad
+        point.dist(&self.pos) - self.radius
     }
 }
