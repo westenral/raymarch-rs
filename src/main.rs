@@ -111,7 +111,7 @@ fn render(
                 dir,
             );
 
-            pixels.push(hit_pos.is_none());
+            pixels.push(hit_pos.is_some());
         }
     }
 
