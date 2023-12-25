@@ -92,12 +92,15 @@ fn render(
 
     let mut pixels: Vec<bool> = vec![];
 
-    for x in 0..resolution.0 {
-        for y in 0..resolution.1 {
+    for y in 0..resolution.1 {
+        let y_completion_percentage = y as f64 / resolution.1 as f64;
+        for x in 0..resolution.0 {
+            let x_completion_percentage = x as f64 / resolution.0 as f64;
+
             let dir = Vec3 {
                 x: 1.0,
-                y: (y as f64 - ((resolution.1) / 2) as f64) * fov.1,
-                z: (x as f64 - ((resolution.0) / 2) as f64) * fov.0,
+                y: fov.1 * y_completion_percentage - fov.1 / 2.0,
+                z: fov.0 * x_completion_percentage - fov.0 / 2.0,
             }
             .normalized();
 
@@ -139,15 +142,15 @@ fn main() {
         rad: 50.0,
     })];
 
-    let xres = 500;
-    let yres = 500;
+    let xres = 1280;
+    let yres = 720;
 
-    let pixels = render(fields, (xres, yres), (0.01, 0.01));
+    let pixels = render(fields, (xres, yres), (16.0 / 4.0, 9.0 / 4.0));
 
     let mut out_image = format!("P3\n{xres} {yres}\n255\n");
 
-    for x in 0..xres {
-        for y in 0..yres {
+    for y in 0..yres {
+        for x in 0..xres {
             let val = pixels[y * xres + x] as usize * 255;
             out_image.push_str(&format!("{val} {val} {val}\n"))
         }
